@@ -12,24 +12,30 @@ def selection(data_id):
     if data_id == 1:
         data = pd.read_csv("./arjpaddy.csv")
         data_test = pd.read_csv("./arjpaddy_test.csv")
+        title = "ARJUNANADHI PADDY"
     elif data_id == 2:
         data = pd.read_csv("./arjmaiz.csv")
         data_test = pd.read_csv("./arjmaiz_test.csv")
+        title = "ARJUNANADHI MAIZ"
     elif data_id == 3:
         data = pd.read_csv("./arjcereals.csv")
-        test_data = pd.read_csv("./arjcereals_test.csv")
+        data_test = pd.read_csv("./arjcereals_test.csv")
+        title = "ARJUNANADHI CEREALS"
     elif data_id == 6:
         data = pd.read_csv("./kscereals.csv")
         data_test = pd.read_csv("./kscereals_test.csv")
+        title = "KOUSIKANADHI CEREALS"
     elif data_id == 5:
         data = pd.read_csv("./ksmaiz.csv")
         data_test = pd.read_csv("./ksmaiz_test.csv")
+        title = "KOUSIKANADHI MAIZ"
     elif data_id == 4:
         data = pd.read_csv("./kspaddy.csv")
         data_test = pd.read_csv("./kspaddy_test.csv")
+        title = "KOUSIKANADHI PADDY"
     else:
         return
-    return predict(data, data_test)
+    return predict(data, data_test, title)
 
 def menu():
     print "\t\tAgriculture Prediction"
@@ -46,7 +52,7 @@ def menu():
         return
     selection(int(data_id))
 
-def predict(data, test_data):
+def predict(data, test_data, title):
     x_train = data[['METEOROLOGICAL DROUGHT', 'HYDROLOGICAL DROUGHT', 'AGRICULTURAL DROUGHT', 'AREA UNDER CULTIVATION']]
     y_train = data[['YIELD']]
 
@@ -62,6 +68,7 @@ def predict(data, test_data):
     plt.plot(dates, y)
     plt.xlabel("Years(0 for 2013, 4 for 2017)")
     plt.ylabel("PCA Components 3D data")
+    plt.title(title)
     plt.show()
     _ = raw_input("<Hit Enter To Continue>")
     plt.close()
